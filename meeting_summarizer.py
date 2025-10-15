@@ -22,7 +22,8 @@ from pydub import AudioSegment
 from tempfile import NamedTemporaryFile
 
 # --- CONFIG ---
-GROQ_API_KEY = "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"
+
+GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
 MODEL_TRANSCRIBE = "whisper-large-v3"
 MODEL_SUMMARY = "llama-3.1-8b-instant"  # supported model
 
