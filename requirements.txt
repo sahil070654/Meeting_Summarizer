@@ -1,0 +1,7 @@
+requirements = """
+flask
+requests
+flask-cors
+pyngrok
+pydub
+"""
