@@ -1,51 +1,52 @@
 # backend.py
 # -*- coding: utf-8 -*-
 
-from flask import Flask, request, jsonify, render_template
-from flask_cors import CORS
-import requests
-import math
 import os
-from pydub import AudioSegment
+import math
+import requests
+import subprocess
+import glob
 from tempfile import NamedTemporaryFile
+from flask import Flask, request, jsonify
+from flask_cors import CORS
 
 # --- CONFIG ---
-GROQ_API_KEY = os.environ.get("GROQ_API_KEY")  # Keep your key in env variables
+GROQ_API_KEY = os.environ.get("GROQ_API_KEY")  # keep key in environment variables
 MODEL_TRANSCRIBE = "whisper-large-v3"
-MODEL_SUMMARY = "llama-3.1-8b-instant"  # supported model
+MODEL_SUMMARY = "llama-3.1-8b-instant"
 
 # --- Flask App ---
 app = Flask(__name__)
 CORS(app)
-
-# --- Optional: ngrok for Colab testing ---
-if os.environ.get("COLAB_TUNNEL") == "1":
-    try:
-        from pyngrok import ngrok
-        port = 5000
-        public_url = ngrok.connect(port)
-        print(f"✅ Public ngrok URL for Colab: {public_url}")
-    except Exception as e:
-        print("Ngrok not running:", e)
 
 # --- Home Route ---
 @app.route("/")
 def home():
     return "<h3>✅ Meeting Summarizer Backend Running</h3>"
 
-# --- Helper: split audio into 1-min chunks ---
-def split_audio(file_path, chunk_length_ms=60*1000):
-    audio = AudioSegment.from_file(file_path)
-    chunks = []
-    total_chunks = math.ceil(len(audio) / chunk_length_ms)
-    for i in range(total_chunks):
-        start = i * chunk_length_ms
-        end = start + chunk_length_ms
-        chunk = audio[start:end]
-        chunk_name = f"chunk_{i}.mp3"
-        chunk.export(chunk_name, format="mp3")
-        chunks.append(chunk_name)
-    return chunks
+# --- Helper: Split audio using ffmpeg ---
+def split_audio_ffmpeg(file_path, chunk_length_sec=60):
+    """
+    Splits audio into chunks using ffmpeg.
+    Returns list of chunk file names.
+    """
+    # Remove old chunks
+    for f in glob.glob("chunk_*.mp3"):
+        os.remove(f)
+
+    # FFmpeg command
+    cmd = [
+        "ffmpeg", "-i", file_path,
+        "-f", "segment",
+        "-segment_time", str(chunk_length_sec),
+        "-c", "copy",
+        "chunk_%03d.mp3"
+    ]
+    subprocess.run(cmd, check=True)
+
+    # Return sorted list of chunk files
+    chunk_files = sorted(glob.glob("chunk_*.mp3"))
+    return chunk_files
 
 # --- Main Route: Transcribe + Summarize ---
 @app.route("/summarize_audio", methods=["POST"])
@@ -59,8 +60,11 @@ def summarize_audio():
     with NamedTemporaryFile(delete=False, suffix=".mp3") as temp_audio:
         audio_file.save(temp_audio.name)
 
-    # Split audio into chunks (1 minute each)
-    chunk_files = split_audio(temp_audio.name, chunk_length_ms=60*1000)
+    # Split audio into 1-minute chunks
+    try:
+        chunk_files = split_audio_ffmpeg(temp_audio.name, chunk_length_sec=60)
+    except subprocess.CalledProcessError as e:
+        return jsonify({"error": "Audio split failed", "details": str(e)}), 500
 
     all_text = ""
     headers = {"Authorization": f"Bearer {GROQ_API_KEY}"}
