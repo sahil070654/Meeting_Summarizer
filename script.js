@@ -1,4 +1,4 @@
-const backendURL = "https://meeting-summarizer-0j39.onrender.com/summarize_audio"; 
+const backendURL = "https://meetingsummarizer-production.up.railway.app/summarize_audio"; 
 // Example: https://abcd1234.onrender.com/summarize_audio
 
 document.getElementById("uploadBtn").addEventListener("click", async () => {
