@@ -3,20 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Meeting Summarizer</title>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Meeting Summarizer</h1>
-        <input type="file" id="audioFile" accept="audio/*">
-        <button id="uploadBtn">Upload & Summarize</button>
+    <h1>Meeting Summarizer</h1>
+    <input type="file" id="audioFile" accept="audio/*">
+    <button id="uploadBtn" type="button">Transcribe & Summarize</button>
 
-        <h2>Transcript:</h2>
-        <div id="transcript"></div>
+    <h3>Transcript:</h3>
+    <div id="transcript"></div>
 
-        <h2>Summary:</h2>
-        <div id="summary"></div>
-    </div>
+    <h3>Summary:</h3>
+    <div id="summary"></div>
+
     <script src="script.js"></script>
 </body>
 </html>
