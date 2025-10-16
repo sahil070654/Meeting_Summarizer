@@ -1,5 +1,5 @@
-const backendURL = "https://meetingsummarizer-production.up.railway.app/summarize_audio"; 
-// Example: https://abcd1234.onrender.com/summarize_audio
+// Set your Railway backend base URL
+const backendURL = "https://meetingsummarizer-production.up.railway.app";
 
 document.getElementById("uploadBtn").addEventListener("click", async () => {
     const fileInput = document.getElementById("audioFile");
@@ -17,7 +17,7 @@ document.getElementById("uploadBtn").addEventListener("click", async () => {
     document.getElementById("summary").innerText = "";
 
     try {
-        const response = await fetch(backendURL, {
+        const response = await fetch(`${backendURL}/summarize_audio`, {
             method: "POST",
             body: formData
         });
