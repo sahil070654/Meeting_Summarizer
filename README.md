@@ -4,6 +4,10 @@ A **full-stack AI-powered web application** that transcribes large audio files i
 Built with **React (frontend)** and **Flask (backend)** — designed to be **fast, secure, and capable of handling long audio files (up to ~30 minutes)**.
 
 ---
+
+## Download Audio files for testing: 
+>https://springfield.municipalwebsites.ca/ckfinder/connector?command=Proxy&lang=en&type=Files&currentFolder=%2F&hash=c245c263ce0eced480effe66bbede6b4d46c15ae&fileName=Council%20Meeting%202025-08-19.mp3
+>https://springfield.municipalwebsites.ca/ckfinder/connector?command=Proxy&lang=en&type=Files&currentFolder=%2F&hash=c245c263ce0eced480effe66bbede6b4d46c15ae&fileName=Planning%20Meeting%20-%20Aoril%2024%2C%202025.mp3
 ## Try it here : https://sahil070654.github.io/Meeting_Summarizer/
 
 ## 🚀 Features
