@@ -4,6 +4,7 @@ A **full-stack AI-powered web application** that transcribes large audio files i
 Built with **React (frontend)** and **Flask (backend)** — designed to be **fast, secure, and capable of handling long audio files (up to ~30 minutes)**.
 
 ---
+## Try it here : https://sahil070654.github.io/Meeting_Summarizer/
 
 ## 🚀 Features
 
