@@ -4,39 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meeting Summarizer</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <div class="container">
-            <h1>Meeting Summarizer</h1>
-            <p>By Sahil</p>
-            <p>Tech Stack: HTML, CSS, JavaScript, Flask, Groq API</p>
-            <p>Backend deployed at: <a href="https://meetingsummarizer-production.up.railway.app" target="_blank">Railway</a></p>
-        </div>
+        <h1>Meeting Summarizer</h1>
+        <p>By <strong>Sahil</strong> | Tech Stack: Flask, HTML/CSS/JS | Backend: Deployed on Railway</p>
     </header>
 
-    <main>
-        <div class="container upload-section">
-            <h2>Upload Your Meeting Audio</h2>
-            <input type="file" id="audioFile" accept="audio/*">
-            <button id="uploadBtn">Transcribe & Summarize</button>
+    <section class="features">
+        <div class="feature-card">
+            <h3>🎧 Long Audio Support</h3>
+            <p>Can process audio files up to ~30 minutes efficiently.</p>
         </div>
-
-        <div class="container output-section">
-            <h2>Transcript</h2>
-            <pre id="transcript">Your transcript will appear here...</pre>
-
-            <h2>Summary</h2>
-            <pre id="summary">Your summary will appear here...</pre>
+        <div class="feature-card">
+            <h3>⚡ Fast & Secure</h3>
+            <p>Transcription and summarization in real-time with privacy.</p>
         </div>
-    </main>
+        <div class="feature-card">
+            <h3>📝 Clear Summaries</h3>
+            <p>Outputs concise bullet-point summaries for easy reading.</p>
+        </div>
+    </section>
+
+    <div class="upload-section">
+        <input type="file" id="audioFile" accept="audio/*">
+        <button id="uploadBtn">🎤 Transcribe & Summarize</button>
+    </div>
+
+    <div class="result-section">
+        <h2>Transcript:</h2>
+        <p id="transcript">Waiting for file...</p>
+        <h2>Summary:</h2>
+        <p id="summary"></p>
+    </div>
 
     <footer>
-        <div class="container">
-            &copy; 2025 Sahil. All rights reserved.
-        </div>
+        &copy; 2025 Sahil | Meeting Summarizer
     </footer>
 
     <script src="script.js"></script>
