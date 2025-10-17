@@ -4,32 +4,106 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meeting Summarizer</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f2f6ff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        header {
+            background-color: #4b6cb7;
+            color: white;
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 { margin: 0; font-size: 2em; }
+        h2 { margin-top: 40px; }
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        .feature-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            width: 200px;
+            text-align: center;
+        }
+        .upload-section {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+            width: 90%;
+            max-width: 600px;
+        }
+        input[type="file"] { margin-bottom: 20px; }
+        button {
+            background-color: #4b6cb7;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        button:hover { background-color: #3a539b; }
+        .result-section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+            width: 90%;
+            max-width: 600px;
+        }
+        #transcript, #summary {
+            white-space: pre-wrap; /* preserves line breaks */
+            line-height: 1.5;
+        }
+        footer {
+            background-color: #4b6cb7;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <header>
         <h1>Meeting Summarizer</h1>
-        <p>By <strong>Sahil</strong> | Tech Stack: Flask, HTML/CSS/JS | Backend: Deployed on Railway</p>
+        <p>By Sahil | Tech Stack: Flask, HTML/CSS/JS | Backend: Deployed on Railway</p>
     </header>
 
     <section class="features">
         <div class="feature-card">
-            <h3>🎧 Long Audio Support</h3>
+            <h3>Long Audio Support</h3>
             <p>Can process audio files up to ~30 minutes efficiently.</p>
         </div>
         <div class="feature-card">
-            <h3>⚡ Fast & Secure</h3>
+            <h3>Fast & Secure</h3>
             <p>Transcription and summarization in real-time with privacy.</p>
         </div>
         <div class="feature-card">
-            <h3>📝 Clear Summaries</h3>
+            <h3>Clear Summaries</h3>
             <p>Outputs concise bullet-point summaries for easy reading.</p>
         </div>
     </section>
 
     <div class="upload-section">
         <input type="file" id="audioFile" accept="audio/*">
-        <button id="uploadBtn">🎤 Transcribe & Summarize</button>
+        <button id="uploadBtn">Transcribe & Summarize</button>
     </div>
 
     <div class="result-section">
@@ -43,6 +117,43 @@
         &copy; 2025 Sahil | Meeting Summarizer
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        const backendURL = "https://meetingsummarizer-production.up.railway.app/summarize_audio";
+
+        document.getElementById("uploadBtn").addEventListener("click", async () => {
+            const fileInput = document.getElementById("audioFile");
+            if (fileInput.files.length === 0) {
+                alert("Please select an audio file");
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const formData = new FormData();
+            formData.append("file", file);
+
+            // Clear previous results
+            document.getElementById("transcript").innerText = "Transcribing...";
+            document.getElementById("summary").innerText = "";
+
+            try {
+                const response = await fetch(backendURL, {
+                    method: "POST",
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    throw new Error("Failed to summarize. Check backend logs.");
+                }
+
+                const data = await response.json();
+                document.getElementById("transcript").innerText = data.transcript;
+                document.getElementById("summary").innerText = data.summary;
+
+            } catch (error) {
+                document.getElementById("transcript").innerText = "";
+                document.getElementById("summary").innerText = "Error: " + error.message;
+            }
+        });
+    </script>
 </body>
 </html>
