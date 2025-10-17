@@ -32,3 +32,36 @@ Built with **React (frontend)** and **Flask (backend)** — designed to be **fas
 
 ## 📦 Project Structure
 
+audio-transcriber/
+│
+├── backend/
+│ ├── backend.py
+│ ├── requirements.txt
+│ └── (optional) .env
+│
+├── frontend/
+│ ├── public/
+│ │ └── index.html
+│ ├── src/
+│ │ ├── App.js
+│ │ ├── App.css
+│ │ ├── components/
+│ │ └── index.js
+│ ├── package.json
+│ └── README.md
+│
+└── README.md
+
+✅ Backend:
+
+You can deploy Flask backend to:
+
+Render
+
+Railway
+
+Vercel (Serverless)
+
+AWS / Azure / Google Cloud
+
+Once deployed, update the frontend .env or config file with: 
