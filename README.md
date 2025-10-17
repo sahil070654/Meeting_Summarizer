@@ -30,38 +30,28 @@ Built with **React (frontend)** and **Flask (backend)** — designed to be **fas
 
 ---
 
-## 📦 Project Structure
 
-audio-transcriber/
-│
-├── backend/
-│ ├── backend.py
-│ ├── requirements.txt
-│ └── (optional) .env
-│
-├── frontend/
-│ ├── public/
-│ │ └── index.html
-│ ├── src/
-│ │ ├── App.js
-│ │ ├── App.css
-│ │ ├── components/
-│ │ └── index.js
-│ ├── package.json
-│ └── README.md
-│
-└── README.md
+🧑‍💻 Developed By
 
-✅ Backend:
+Sahil
+📍 Vijayawada, India
+🎓 B.Tech CSE, VIT-AP University
+💬 Passionate about AI, Machine Learning & Full-Stack Development
 
-You can deploy Flask backend to:
+🧰 Future Improvements
 
-Render
+Add multi-language transcription
 
-Railway
+Include speech sentiment analysis
 
-Vercel (Serverless)
+Add downloadable transcript as .txt / .pdf
 
-AWS / Azure / Google Cloud
+Implement real-time streaming transcription
 
-Once deployed, update the frontend .env or config file with: 
+📜 License
+
+This project is licensed under the MIT License — you’re free to modify and distribute it.
+
+🌟 Show Your Support
+
+If you like this project, please ⭐ the repository and share it with others!
