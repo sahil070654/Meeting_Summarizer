@@ -40,13 +40,13 @@ Sahil
 
 🧰 Future Improvements
 
-Add multi-language transcription
+> Add multi-language transcription
 
-Include speech sentiment analysis
+> Include speech sentiment analysis
 
-Add downloadable transcript as .txt / .pdf
+> Add downloadable transcript as .txt / .pdf
 
-Implement real-time streaming transcription
+> Implement real-time streaming transcription
 
 📜 License
 
