@@ -26,7 +26,7 @@ Built with **React (frontend)** and **Flask (backend)** — designed to be **fas
 | **Backend**    | Python, Flask, Flask-CORS |
 | **AI Model**   | OpenAI Whisper Large V3 |
 | **Styling**    | Custom CSS with Flexbox + Minimal UI |
-| **Deployment** | GitHub Pages (Frontend), Render / Vercel / Railway (Backend) |
+| **Deployment** | GitHub Pages (Frontend),Railway (Backend) |
 
 ---
 
