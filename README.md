@@ -10,6 +10,9 @@ Built with **React (frontend)** and **Flask (backend)** — designed to be **fas
 >https://springfield.municipalwebsites.ca/ckfinder/connector?command=Proxy&lang=en&type=Files&currentFolder=%2F&hash=c245c263ce0eced480effe66bbede6b4d46c15ae&fileName=Planning%20Meeting%20-%20Aoril%2024%2C%202025.mp3
 ## Try it here : https://sahil070654.github.io/Meeting_Summarizer/
 
+## When using long audio file please wait for 25 to 40 sec to parse the audio and get actual better outputs.
+
+
 ## 🚀 Features
 
 ✅ Transcribe long audio files (up to 30 minutes)  
